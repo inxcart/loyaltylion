@@ -37,7 +37,7 @@ class LoyaltyLion_Client
 	private $connection;
 	private $base_uri = 'https://api.loyaltylion.com/v2';
 
-	public function __construct($token, $secret, $extra = array())
+	public function __construct($token, $secret, $extra = [])
 	{
 		$this->token = $token;
 		$this->secret = $secret;
@@ -66,9 +66,9 @@ class LoyaltyLion_Client
 	 */
 	public function getCustomerAuthToken($customer_id)
 	{
-		$params = array(
+		$params = [
 			'customer_id' => $customer_id,
-		);
+        ];
 
 		$response = $this->connection->post('/customers/authenticate', $params);
 
@@ -96,16 +96,16 @@ class LoyaltyLion_Client
 		if (isset($response->error))
 		{
 			// this kind of error is from curl itself, e.g. a request timeout, so just return that error
-			return (object)array(
+			return (object) [
 				'success' => false,
 				'status' => $response->status,
 				'error' => $response->error,
-			);
+            ];
 		}
 
-		$result = array(
+		$result = [
 			'success' => (int)$response->status >= 200 && (int)$response->status <= 204
-		);
+        ];
 
 		if (!$result['success'])
 		{

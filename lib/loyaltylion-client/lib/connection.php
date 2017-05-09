@@ -42,55 +42,55 @@ class LoyaltyLion_Connection
 		$this->base_uri = $base_uri;
 	}
 
-	public function post($path, $data = array())
+	public function post($path, $data = [])
 	{
 		return $this->request('POST', $path, $data);
 	}
 
-	public function put($path, $data = array())
+	public function put($path, $data = [])
 	{
 		return $this->request('PUT', $path, $data);
 	}
 
-	public function get($path, $data = array())
+	public function get($path, $data = [])
 	{
 		return $this->request('GET', $path, $data);
 	}
 
 	private function request($method, $path, $data)
 	{
-		$options = array(
+		$options = [
 			CURLOPT_URL => $this->base_uri.$path,
 			CURLOPT_USERAGENT => 'loyaltylion-php-client-v2.0.0',
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_TIMEOUT => $this->timeout,
 			// CURLOPT_HEADER => false,
 			CURLOPT_USERPWD => $this->token.':'.$this->secret,
-		);
+        ];
 
 		switch ($method)
 		{
 			case 'POST':
-				$options += array(
+				$options += [
 					CURLOPT_POST => true,
-				);
+                ];
 				break;
 			case 'PUT':
-				$options += array(
+				$options += [
 					CURLOPT_CUSTOMREQUEST => 'PUT',
-				);
+                ];
 		}
 
 		if ($method == 'POST' || $method == 'PUT')
 		{
 			$body = json_encode($data);
-			$options += array(
-				CURLOPT_POSTFIELDS => $body,
-				CURLOPT_HTTPHEADER => array(
+			$options += [
+                CURLOPT_POSTFIELDS => $body,
+                CURLOPT_HTTPHEADER => [
 					'Content-Type: application/json',
 					'Content-Length: '.strlen($body),
-				),
-			);
+                ],
+            ];
 		}
 
 		// now make the request
@@ -104,18 +104,18 @@ class LoyaltyLion_Connection
 
 		if ($error_code !== 0)
 		{
-			$response = array(
+			$response = [
 				'status' => $headers['http_code'],
 				'error' => $error_msg,
-			);
+            ];
 		}
 		else
 		{
-			$response = array(
+			$response = [
 				'status' => $headers['http_code'],
 				'headers' => $headers,
 				'body' => $body,
-			);
+            ];
 		}
 
 		return (object)$response;

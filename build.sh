@@ -4,7 +4,6 @@ CWD_BASENAME=${PWD##*/}
 FILES+=("logo.gif")
 FILES+=("logo.png")
 FILES+=("${CWD_BASENAME}.php")
-FILES+=("css/**")
 FILES+=("img/**")
 FILES+=("lib/**")
 FILES+=("views/**")

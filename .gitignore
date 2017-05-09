@@ -3,3 +3,4 @@ config.xml
 .idea/
 .sass-cache/
 node_modules/
+*loyaltylion*.zip

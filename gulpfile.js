@@ -12,14 +12,14 @@ gulp.task('css', function () {
     .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
     .pipe(csso())
     .pipe(rename('loyaltylion.min.css'))
-    .pipe(gulp.dest('./css'));
+    .pipe(gulp.dest('./views/css'));
 });
 
 gulp.task('js', function () {
   gulp.src('./js/loyaltylion.js')
     .pipe(uglify())
     .pipe(rename('loyaltylion.min.js'))
-    .pipe(gulp.dest('./js'));
+    .pipe(gulp.dest('./views/js'));
 });
 
 gulp.task('watch', function () {

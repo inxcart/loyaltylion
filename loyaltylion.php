@@ -102,7 +102,7 @@ class LoyaltyLion extends Module
         $this->base_uri = $this->getBaseUri();
 
         if (isset($this->context->controller)) {
-            $this->context->controller->addCSS($this->_path.'/views/css/loyaltylion.min.css', 'all');
+            $this->context->controller->addCSS($this->_path.'views/css/loyaltylion.min.css', 'all');
         } else {
             echo '<link rel="stylesheet" type="text/css" href="../modules/loyaltylion-prestashop/views/css/loyaltylion.min.css" />';
         }
